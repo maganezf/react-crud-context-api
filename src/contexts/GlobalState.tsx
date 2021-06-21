@@ -1,6 +1,6 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 
-import { v5 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { IUser } from '../types';
 
 import { reducer } from './AppReducer';

@@ -22,25 +22,25 @@ const EditUser: React.FC = () => {
   const currentUserId = params.id;
 
   useEffect(() => {
-    const userId = currentUserId;
+    const userId: Number | String = currentUserId;
     const findSelectedUser: any = users.find(
-      user => user.id === Number(userId)
+      user => user.id === Number(userId) || user.id === String(userId)
     );
     setSelectedUser(findSelectedUser);
   }, [currentUserId, users]);
 
-  function onSubmit() {
+  function onSubmit(event: ChangeEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     editUser(selectedUser);
 
-    // console.log('new user edited:', editUser);
+    console.log('new user edited:', selectedUser);
     history.push('/');
   }
 
   const onChangeEditUser = (
     event: ChangeEvent<HTMLFormElement | HTMLInputElement>
   ) => {
-    event.preventDefault();
-
     setSelectedUser({
       ...selectedUser,
       [event.target.name]: event.target.value,
@@ -57,7 +57,6 @@ const EditUser: React.FC = () => {
           <Input
             type="text"
             name="name"
-            // value={selectedUser.name}
             onChange={onChangeEditUser}
             placeholder="Enter new name"
             required
